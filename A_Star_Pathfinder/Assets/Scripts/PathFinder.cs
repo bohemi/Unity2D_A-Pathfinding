@@ -22,11 +22,26 @@ public class PathFinder : MonoBehaviour
         List<Node> openSet = new List<Node>();
         List<Node> closedSet = new List<Node>();
 
-        openSet.Add(startNode);
+        openSet.Add(startNode); // At the beginning open will only contain the starting node
 
         while (openSet.Count > 0)
         {
             Node currentNode = openSet[0];
+
+            // ** the first time entry inside the below loop will be skipped. Because at the start
+            // openset contains 1 node and forLoop also starts from 1. since at the beginning we dont
+            // even have any values for comparison and no neighbours.
+
+            // since currentNode will always be the first of the openset, we will start comparing openSet
+            // ( starting from openset[1] ) to currentNode that we retrieve from neighbourNodes
+            for (int i = 1; i < openSet.Count; i++)
+            {
+                if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost)
+                {
+                    if (openSet[i].hCost < currentNode.hCost)
+                    { currentNode = openSet[i]; }
+                }
+            }
 
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
@@ -44,6 +59,7 @@ public class PathFinder : MonoBehaviour
 
                 int costToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
 
+                // in the first iter. of all neighbour,all the gCost will be zero since we are setting values here.
                 if (costToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = costToNeighbour;
