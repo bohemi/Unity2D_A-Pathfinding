@@ -46,12 +46,12 @@ public class Grids : MonoBehaviour
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x == 0 && y == 0) // for given node will not include itself as a neighbour
+                if (x == 0 && y == 0)
                     continue;
 
                 int nodeAtx = node.gridX + x;
                 int nodeAty = node.gridY + y;
-                // by given gidSizes it will prevent going beyond the array size of grids
+
                 if (nodeAtx >= 0 && nodeAtx < gridSizeX && nodeAty >= 0 && nodeAty < gridSizeY)
                     neighbour.Add(grid[x, y]);
             }
