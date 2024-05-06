@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Node
@@ -11,6 +9,7 @@ public class Node
 
     public int gCost;
     public int hCost;
+    // if we find the best node from our neighbours then we set the parent of that node to this
     public Node parent;
 
     public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY)

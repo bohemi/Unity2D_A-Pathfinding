@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,11 +48,11 @@ public class Grids : MonoBehaviour
                 if (x == 0 && y == 0)
                     continue;
 
-                int nodeAtx = node.gridX + x;
-                int nodeAty = node.gridY + y;
+                int nodeX = node.gridX + x;
+                int nodeY = node.gridY + y;
 
-                if (nodeAtx >= 0 && nodeAtx < gridSizeX && nodeAty >= 0 && nodeAty < gridSizeY)
-                    neighbour.Add(grid[x, y]);
+                if (nodeX >= 0 && nodeX < gridSizeX && nodeY >= 0 && nodeY < gridSizeY)
+                    neighbour.Add(grid[nodeX, nodeY]);
             }
         }
         return neighbour;
@@ -73,6 +72,8 @@ public class Grids : MonoBehaviour
         return grid[x, y];
     }
 
+    public List<Node> path;
+
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridSize.x, gridSize.y)); // Grid Area
@@ -83,6 +84,12 @@ public class Grids : MonoBehaviour
             {
                 // if overlpaCircle detects unwalkable layer then turn that grid to red
                 Gizmos.color = n.walkable ? Color.green : Color.red;
+
+                if (path != null)
+                {
+                    if (path.Contains(n))
+                    { Gizmos.color = Color.yellow; }
+                }
 
                 Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
             }
