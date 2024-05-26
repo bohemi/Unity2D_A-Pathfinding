@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class Node
 {
-    public bool walkable;
-    public Vector2 worldPosition;
-    public int gridX;
-    public int gridY;
+    public bool Walkable;
+    public Vector2 WorldPosition;
+    public int GridX;
+    public int GridY;
 
-    public int gCost;
-    public int hCost;
+    public int GCost;
+    public int HCost;
     // if we find the best node from our neighbours then we set the parent of that node to this
-    public Node parent;
+    public Node Parent;
 
-    public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY)
+    public Node(bool walkable, Vector2 worldPos, int gridX, int gridY)
     {
-        walkable = _walkable;
-        worldPosition = _worldPos;
-        gridX = _gridX;
-        gridY = _gridY;
+        Walkable = walkable;
+        WorldPosition = worldPos;
+        GridX = gridX;
+        GridY = gridY;
     }
 
     public int fCost
     {
         get
         {
-            return gCost + hCost;
+            return GCost + HCost;
         }
     }
 }
